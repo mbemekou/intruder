@@ -1,0 +1,14 @@
+POST /cookie/consent/ HTTP/1.1
+Host: www.facebook.com
+Connection: close
+Content-Length: 228
+Origin: https://www.facebook.com
+User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36
+Content-Type: application/x-www-form-urlencoded
+Accept: */*
+Referer: https://www.facebook.com/
+Accept-Encoding: gzip, deflate
+Accept-Language: en-US,en;q=0.9,fr;q=0.8
+Cookie: fr=0f6MqHrGyj2HUtSwv..BcrVzL.BD.AAA.0.0.Bc7Q_K.AWWFx4FJ; sb=yg_tXA63ev8Jx6XmpwhYPPV9; datr=yg_tXKrlxQG0LKQ2NeefPt2s; wd=1366x672
+
+__user=0&__a=1&__dyn=7xe6FomK36Q1PyWzEjy9uC1swgE98nwgU29zEdEc8uw9-3K4o5K0Y8hw8C1rw5VCwjE3awbG789U2NwlU6i0o2US1vwiE16888&__req=5&__be=1&__pc=PHASED%3ADEFAULT&dpr=1&__rev=1000757070&__s=%3Axj2sq8%3As804f6&lsd=AVrCvDec&jazoest=2718

@@ -8,6 +8,7 @@ from termcolor import colored
 import argparse
 import time
 import re
+import json
 def banner():
 	os.system("clear")
 	
@@ -38,6 +39,7 @@ def request_parser(req):
 	global body
 	global cible
 	global method
+	global content
 
 	body=''
 	is_head=False
@@ -65,7 +67,8 @@ def request_parser(req):
 	for key,value in h.items():
 		if "^ATTACK^" in value:
 			cible=key
-		
+	content=h["Content-Type"]
+
 
 
 
@@ -133,31 +136,48 @@ def requesthandler(donnee):
 			else:
 				print(colored(code,'red')+"\t|\t"+str(chars)+"\t|\t"+str(words)+"\t|\t"+str(lines)+"\t|\t{}".format(donnee)+"\t\t")
 	elif(len(req)):
+		global content
 
 		if(is_body):
 			global method
-			d=donnee.strip("\r\n").split("&")
+
+			
 			payload={}
 			headers={}
 			a=""
 			b=""
-			for i in d:
-				a=i.split("=")[0]
-				b=i.split("=")[1]
-				payload[a]=b
-			h=head.split("\r\n")
-			for j in h:
-				if(":" in j):
-					headers[j.split(":")[0]]=j.split(":")[1].strip(" ")
+			if("application/x-www-form-urlencoded" in content):
+				d=donnee.strip("\r\n").split("&")
+				for i in d:
+					a=i.split("=")[0]
+					b=i.split("=")[1]
+					payload[a]=b
+					h=head.split("\r\n")
+				for j in h:
+					if(":" in j):
+						headers[j.split(":")[0]]=j.split(":")[1].strip(" ")
+				if(method=="POST"):
+					r=requests.post(url,data=payload, headers=headers ,allow_redirects=False)
+				elif(method=="GET"):
+					r=requests.get(url, headers=headers ,allow_redirects=False)
+				elif(method=="PUT"):
+					r=requests.put(url,data=payload, headers=headers ,allow_redirects=False)
+				elif(method=="PATCH"):
+					r=requests.patch(url,data=payload, headers=headers ,allow_redirects=False)
+			elif(("application/json" in content) or ("text/plain" in content)):
+				payload=json.loads(donnee)
+				h=head.split("\r\n")
+				for j in h:
+					if(":" in j):
+						headers[j.split(":")[0]]=j.split(":")[1].strip(" ")
 
-			if(method=="POST"):
-				r=requests.post(url,data=payload, headers=headers ,allow_redirects=False)
-			elif(method=="GET"):
-				r=requests.get(url, headers=headers ,allow_redirects=False)
-			elif(method=="PUT"):
-				r=requests.put(url,data=payload, headers=headers ,allow_redirects=False)
-			elif(method=="PATCH"):
-				r=requests.patch(url,data=payload, headers=headers ,allow_redirects=False)
+				if(method=="POST"):
+					r=requests.post(url,json=payload, headers=headers ,allow_redirects=False)
+			
+				elif(method=="PUT"):
+					r=requests.put(url,json=payload, headers=headers ,allow_redirects=False)
+				elif(method=="PATCH"):
+					r=requests.patch(url,json=payload, headers=headers ,allow_redirects=False)
 			lines=r.content.count("\n")
 			chars=len(r.content)
 			words=len(re.findall("\S+",r.content))

@@ -18,7 +18,7 @@ cd ./intruder
 chmod +x intruder.py
  
 
-./intruder.py [-h] -u <target url> -w <wordlist> [-t] <number of threads> 
+./intruder.py [-h] -u \<target url\> -w \<wordlist\> [-t] \<number of threads\> 
  
 example:
 

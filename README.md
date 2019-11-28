@@ -1,7 +1,7 @@
 # intruder
 simple  pythonic  fuzzer
 
-PortScanner is a simple tool written in python to help you fuzz web pages
+intruder is a simple tool written in python to help you fuzz web pages
 
 Author: Mbemekou Fred
 

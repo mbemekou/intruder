@@ -332,10 +332,13 @@ def start(argv):
 	get=False
 	banner()
 	parser=argparse.ArgumentParser(usage='''
-./Intruder.py [-h] -u <target url> -w <wordlist> [-t] <number of threads>
+./Intruder.py [-h] -u <target url> -w <wordlist> [-t] <number of threads> 
 example:
-./Intruder.py -u http://127.0.0.1/^ATTACK^ -w /usr/share/wordlist/rockyou.txt -t 50
-./Intruder.py -u http://127.0.0.1/login.php?username=admin&password=^ATTACK^ -w rockyou.txt -t 50
+./Intruder.py -u http://127.0.0.1/^ATTACK^ -w /usr/share/wordlist/dirbuster/directory-list-2.3-medium.txt--hc 404 -t 50 -x php
+./Intruder.py -u http://127.0.0.1/login.php?username=admin&password=^ATTACK^ -w rockyou.txt -t 50 --hw 5
+./Intruder.py -u http://127.0.0.1/login.php --data "username=^ATTACK^&password=pass&login=login" -w /usr/share/wordlist/sqli.txt
+./Intruder.py -u http://127.0.0.1/login.php -r burpsuite.req -w rockyou.txt
+
 
 		''')
 	parser.add_argument("-u",dest="url",required=True,type=str,help="The target url")

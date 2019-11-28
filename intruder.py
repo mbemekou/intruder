@@ -1,6 +1,6 @@
 #! /usr/bin/python
 import requests
-from queue import Queue
+from Queue import Queue
 import threading 
 import os
 import sys
